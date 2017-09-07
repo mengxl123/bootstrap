@@ -55,6 +55,7 @@ const Dropdown = (() => {
     DISABLED  : 'disabled',
     SHOW      : 'show',
     DROPUP    : 'dropup',
+    DROPRIGHT : 'dropright',
     MENURIGHT : 'dropdown-menu-right',
     MENULEFT  : 'dropdown-menu-left'
   }
@@ -71,7 +72,9 @@ const Dropdown = (() => {
     TOP       : 'top-start',
     TOPEND    : 'top-end',
     BOTTOM    : 'bottom-start',
-    BOTTOMEND : 'bottom-end'
+    BOTTOMEND : 'bottom-end',
+    RIGHT     : 'right-start',
+    RIGHTEND  : 'right-end'
   }
 
   const Default = {
@@ -234,14 +237,15 @@ const Dropdown = (() => {
 
     _getPlacement() {
       const $parentDropdown = $(this._element).parent()
-      let placement = this._config.placement
-
+      let placement         = this._config.placement
       // Handle dropup
       if ($parentDropdown.hasClass(ClassName.DROPUP) || this._config.placement === AttachmentMap.TOP) {
         placement = AttachmentMap.TOP
         if ($(this._menu).hasClass(ClassName.MENURIGHT)) {
           placement = AttachmentMap.TOPEND
         }
+      } else if ($parentDropdown.hasClass(ClassName.DROPRIGHT) || this._config.placement === AttachmentMap.RIGHT) {
+        placement = AttachmentMap.RIGHT
       } else if ($(this._menu).hasClass(ClassName.MENURIGHT)) {
         placement = AttachmentMap.BOTTOMEND
       }
